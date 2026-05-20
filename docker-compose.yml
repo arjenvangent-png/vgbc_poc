@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: vgbc_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: vgbc_poc
+      POSTGRES_USER: vgbc_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-kies_een_sterk_wachtwoord}
+    ports:
+      - "5432:5432"
+    volumes:
+      - vgbc_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vgbc_user -d vgbc_poc"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  vgbc_pgdata:
