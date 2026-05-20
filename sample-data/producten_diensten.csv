@@ -1,0 +1,31 @@
+product_id,omschrijving,eenheid,verkoopprijs,btw_tarief,actief
+1,Advies en consultancy,uur,95.0,0.21,True
+2,Projectbegeleiding,uur,85.0,0.21,True
+3,Uitvoering schilderwerk buiten,m²,18.5,0.21,True
+4,Uitvoering schilderwerk binnen,m²,14.0,0.21,True
+5,Behangen,m²,22.0,0.21,True
+6,Stucwerk,m²,35.0,0.21,True
+7,Houtrot herstel,uur,75.0,0.21,True
+8,Schuurwerk en voorbereiding,uur,55.0,0.21,True
+9,Gevelreiniging,m²,8.0,0.21,True
+10,Dakgoot behandeling,m,12.0,0.21,True
+11,Grondverf aanbrengen,m²,6.5,0.21,True
+12,Lakken kozijnen,stuk,45.0,0.21,True
+13,Kleuradvies,uur,65.0,0.21,True
+14,Snoeien en onderhoud,uur,60.0,0.21,True
+15,Tuinaanleg,m²,25.0,0.21,True
+16,Bestrating,m²,40.0,0.21,True
+17,Autodetailing,stuk,120.0,0.21,True
+18,APK-keuring begeleiding,stuk,35.0,0.21,True
+19,Kleine reparaties,uur,65.0,0.21,True
+20,Materiaal verf (liter),liter,8.5,0.21,True
+21,Materiaal grondverf (liter),liter,6.0,0.21,True
+22,Schuurpapier (set),set,12.0,0.21,True
+23,Kwasten en rollers (set),set,18.0,0.21,True
+24,Afplakfolie (m²),m²,2.5,0.21,True
+25,Houtbeschermingsproduct (liter),liter,14.0,0.21,True
+26,Kitten en afdichtmiddel (stuk),stuk,9.0,0.21,True
+27,Steiger huur (dag),dag,85.0,0.21,True
+28,Hoogwerker huur (dag),dag,180.0,0.21,True
+29,Cursus veiligheid op hoogte,stuk,250.0,0.21,True
+30,Omzetbelasting correctie,stuk,0.0,0.09,True
