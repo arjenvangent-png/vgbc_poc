@@ -75,7 +75,7 @@ switch ($Target) {
     "app" {
         Require-Env "ANTHROPIC_API_KEY"
         Write-Host "Streamlit-app starten op http://localhost:8501 ..."
-        streamlit run "app/main.py"
+        python -m streamlit run "app/main.py"
     }
 
     "test" {
