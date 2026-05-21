@@ -1,0 +1,178 @@
+PRODUCTISERING — TWEE ARCHITECTUUR-VRAGEN
+==========================================
+
+Vastgelegd op 2026-05-21 na de werkende POC.
+Twee vragen van Arjen over de toekomst van de oplossing,
+plus de overwegingen die we hebben besproken.
+
+
+VRAAG 1 — KAN DEZE OPLOSSING OOK GEHEEL IN DE CLOUD DRAAIEN?
+=============================================================
+
+Code-technisch: ja, en dat kost minimaal werk.
+
+De app gebruikt al DATABASE_URL als omgevingsvariabele. Verander je die
+naar een cloud-Postgres (Supabase, Neon, Hetzner, Azure Database for
+PostgreSQL — allemaal mogelijk), dan werkt de app onveranderd.
+Streamlit hosten gaat ook eenvoudig op Render, Railway of Fly.io voor
+€5-€20/maand. Dat is misschien 1-2 dagen werk per klant.
+
+Maar er zitten drie architectuur-vragen onder die niet triviaal zijn:
+
+
+A. Hoe komt de data uit het financieel pakket in de cloud-database?
+-------------------------------------------------------------------
+Drie patronen, oplopend in kwaliteit en bouwkosten:
+
+  1. Handmatige upload — klant exporteert maandelijks een Excel uit zijn
+     boekhoudpakket, sleept 'm in de webapp, app verwerkt 'm. Simpel,
+     geen koppeling, klantvriendelijk genoeg voor een klein bedrijf.
+     Eén dag werk.
+
+  2. Geplande push vanaf on-prem — een klein scriptje op de klant-laptop
+     (of een goedkope VPS) pakt elke nacht data uit de boekhouding en
+     pusht naar de cloud-DB. Klant ziet niets, alles loopt vanzelf.
+     Een paar dagen werk per type bronpakket.
+
+  3. Directe API-koppeling — koppel rechtstreeks met Exact Online,
+     Snelstart, Moneybird, AFAS, etc. via hun officiële API's. Meest
+     gepolijst, geen tussenstappen, real-time. Maar elk pakket heeft
+     z'n eigen API en authenticatieflow — reken op 1-2 weken per pakket
+     dat je ondersteunt.
+
+Voor MKB-klanten: patroon 1 (handmatig) plus patroon 3 alleen voor de
+twee grote boekhoudpakketten (Exact en Moneybird) is waarschijnlijk de
+juiste start. Patroon 2 is ingewikkeld zonder veel waarde-toevoeging.
+
+
+B. Authenticatie en multi-tenancy
+---------------------------------
+De huidige POC heeft geen login — wie de URL kent, kan vragen stellen.
+Voor cloud-productie heb je nodig: login per gebruiker, klant-isolatie
+(klant A ziet nooit data van klant B), en per-klant configuratie.
+
+Dit is niet enorm complex met tools als Supabase Auth of Auth0, maar
+het is wel een week werk om netjes neer te zetten en goed te testen.
+
+
+C. Privacy, GDPR, klantvertrouwen
+---------------------------------
+Op dit moment zegt de website "lokaal en veilig — uw data blijft binnen
+het bedrijf". Bij cloud verandert dat verhaal. Niet onmogelijk om uit
+te leggen (alle goede MKB-software draait in de cloud), maar de
+marketing moet bewust mee schuiven.
+
+Klanten met gevoelige data (bv. medische, juridische sectoren) blijven
+mogelijk om die reden bij de lokale variant.
+
+
+Voorlopige aanbeveling
+----------------------
+Uiteindelijk drie deployment-vormen aanbieden:
+
+  - LOKAAL (huidige POC) — voor de privacy-bewuste klant of branches
+    met gevoelige data. Hogere drempel om te gebruiken.
+
+  - HYBRIDE — Postgres lokaal of bij klant in eigen Azure/AWS-account,
+    chatbot-UI in de cloud, verbinding via VPN of tunnel. Voor de
+    middenmoot.
+
+  - VOLLEDIG CLOUD — alles bij VGBC gehost. Voor de meeste klanten —
+    laagste drempel, makkelijkst aan te bieden, hoogste marge omdat
+    het op-eigen-laptop-installeren wegvalt.
+
+Het meeste werk gaat zitten in:
+  - één keer multi-tenant-fundament bouwen (1-2 weken)
+  - API-koppelingen met de drie grootste boekhoudpakketten
+    (1-2 weken per pakket)
+
+
+VRAAG 2 — KAN DE LOKALE OPLOSSING ZONDER PYTHON-INSTALLATIE WORDEN GELEVERD?
+============================================================================
+
+(bv. via een setup.exe)
+
+Vandaag merkten we zelf hoeveel friction Python + psql + PATH +
+ExecutionPolicy oplevert. Volkomen begrijpelijk dat je dat een klant
+niet wilt aandoen. Twee paden om het op te lossen, met heel
+verschillende inspanningen:
+
+
+Pragmatisch pad — "één klik, alles eromheen ook"
+------------------------------------------------
+Eén PowerShell-installer-script dat alles regelt:
+
+  - Python downloaden via winget
+  - PostgreSQL installeren
+  - VGBC-pakket downloaden
+  - .env-wizard om de klant API-keys te laten invullen
+  - Database initialiseren, schema laden
+
+De klant dubbelklikt één bestand, beantwoordt twee vragen, en heeft
+een werkende installatie.
+
+Werk: 1-2 dagen om netjes te bouwen. De klant heeft de
+"voelt-als-installer"-ervaring zonder dat we echt iets compilen.
+
+Of: een DOCKER-INSTALLER — klant installeert eenmalig Docker Desktop
+(één install vanaf docker.com), daarna draait de hele stack (Postgres
++ app) als één 'docker compose up' commando. Iets meer overhead voor
+de klant, maar veel cleaner en de code blijft 1-op-1 hetzelfde als
+de cloudvariant.
+
+
+Volledig pad — echte single .exe
+---------------------------------
+Met PyInstaller of Nuitka kun je de Python-app + alle dependencies in
+één .exe bundelen (resulteert in een bestand van 150-300 MB).
+Postgres heeft een "portable" variant die je mee kunt verpakken zonder
+install. Een echte Windows-installer (MSI of NSIS) bovenop dat geheel.
+
+Resultaat: één setup.exe, klant klikt door wizard, klaar.
+
+Werk: 1-2 weken voor de eerste werkende versie, en daarna
+maintenance-druk omdat Python-versies, Postgres-versies en
+Windows-quirks regelmatig dingen breken. Niet sexy, wel tijdrovend.
+
+
+Pragmatische aanbeveling
+------------------------
+Ga voor het PowerShell-installer-script óf Docker-route. Beide voelen
+voor de klant als "ik klik, het werkt" zonder dat jij twee weken aan
+een installer kwijt bent.
+
+Echte single-.exe is meestal engineering-perfectie ten koste van iets
+nuttigers.
+
+Een derde optie waar je over kunt nadenken: voor heel kleine bedrijven
+(<50k rijen totale data) kun je Postgres helemaal vervangen door
+DuckDB of SQLite — beide file-based, geen install, lichter dan een
+veer. Komt heel dicht bij "zip uitpakken, dubbelklik exe, klaar".
+
+
+CONCLUSIE
+=========
+
+Beide vragen zijn realiseerbaar — geen enkele blokkade in de huidige code.
+
+  - Cloud heeft de meest interessante zakelijke implicaties:
+    multi-tenancy, betere marge, breder publiek.
+
+  - Single-installer is een productie-investering die je pas hoeft
+    te doen als je de drempel "nieuwe klant onboarden" écht omlaag
+    wilt brengen — waarschijnlijk pas relevant na klant 3-5.
+
+
+WAT JE NU NIET HOEFT TE BESLISSEN
+=================================
+
+Geen van deze keuzes hoeft vóór de eerste betalende klant gemaakt te
+worden. De huidige lokale POC is voldoende voor:
+
+  - Verkoopgesprekken met prospects ("ik kan u dit nu al laten zien")
+  - Founding-customer #1 die "om de tafel een werkende demo" wil
+  - Het scherpstellen van de eigen aanbieding
+
+Pas wanneer je merkt dat een specifieke klant niet kan/wil installeren,
+of vraagt om mobiel-toegankelijk dashboard, beslis dan welke richting
+je opgaat.

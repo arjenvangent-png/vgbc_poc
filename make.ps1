@@ -49,9 +49,12 @@ switch ($Target) {
     "schema" {
         Require-Env "DATABASE_URL"
         Write-Host "Schema aanmaken..."
-        psql $env:DATABASE_URL -f "db/ddl/001_schema.sql"
-        psql $env:DATABASE_URL -f "db/views/views.sql"
-        psql $env:DATABASE_URL -f "db/ddl/002_roles.sql"
+        psql -d "$env:DATABASE_URL" -v ON_ERROR_STOP=1 -f "db/ddl/001_schema.sql"
+        if ($LASTEXITCODE -ne 0) { Write-Error "psql failure bij 001_schema.sql (exit $LASTEXITCODE)" }
+        psql -d "$env:DATABASE_URL" -v ON_ERROR_STOP=1 -f "db/views/views.sql"
+        if ($LASTEXITCODE -ne 0) { Write-Error "psql failure bij views.sql (exit $LASTEXITCODE)" }
+        psql -d "$env:DATABASE_URL" -v ON_ERROR_STOP=1 -f "db/ddl/002_roles.sql"
+        if ($LASTEXITCODE -ne 0) { Write-Error "psql failure bij 002_roles.sql (exit $LASTEXITCODE)" }
         Write-Host "Schema klaar."
     }
 

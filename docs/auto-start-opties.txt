@@ -1,0 +1,251 @@
+AUTOMATISCH HERSTARTEN VAN DE LOCALHOST POC
+============================================
+
+Vastgelegd op 2026-05-21 na de reboot-vraag.
+Drie manieren om de Streamlit-app na een laptop-herstart weer
+beschikbaar te krijgen, oplopend in onzichtbaarheid en complexiteit.
+
+
+ACHTERGROND — WAAROM IS DIT NODIG?
+===================================
+
+PostgreSQL draait als Windows-service en herstart automatisch bij
+het opstarten van de laptop. Te checken met:
+
+  Get-Service postgresql-x64-16 | Select-Object Name, Status, StartType
+
+Verwacht: Status = Running, StartType = Automatic.
+
+De Streamlit-app draait echter in een PowerShell-venster. Sluit je
+dat venster (of herstart de laptop), dan is de app weg. De drie
+opties hieronder lossen dat op.
+
+Voor alle opties geldt dat het bestand `start-app.bat` in
+`01-dev-poc/` de basis is. Dat script:
+
+  - gaat naar de juiste werkmap
+  - voegt PostgreSQL toe aan PATH (nodig voor schema-checks)
+  - start `make.ps1 app` in een PowerShell-venster dat openblijft
+
+
+OPTIE A — DESKTOP-SNELKOPPELING (AANBEVOLEN VOOR POC/DEMO)
+==========================================================
+
+Wat het is
+----------
+Eén keer een snelkoppeling op het bureaublad aanmaken. Dubbelklik
+om de app te starten. Sluiten = app stopt.
+
+Hoe je 't maakt
+---------------
+1. Open Verkenner en ga naar:
+   C:\projects\VGBC\Van Gent BI Consulting\01-dev-poc
+
+2. Rechter-muisklik op `start-app.bat`.
+
+3. Kies: "Kopiëren naar" → "Bureaublad (snelkoppeling maken)".
+   (Of in Windows 11: "Meer opties weergeven" → "Verzenden naar"
+   → "Bureaublad (snelkoppeling)".)
+
+4. Op het bureaublad verschijnt een snelkoppeling. Hernoem 'm
+   desgewenst naar "VGBC POC starten".
+
+5. Optioneel: rechtermuisklik → Eigenschappen → "Pictogram
+   wijzigen" om een herkenbaar icoon te kiezen.
+
+Dagelijks gebruik
+-----------------
+Dubbelklik de snelkoppeling. Wacht ~5 seconden, browser opent op
+http://localhost:8501.
+
+Voor- en nadelen
+----------------
++ Volledig onder eigen controle: ik start 'm wanneer ik 'm wil.
++ PowerShell-venster zichtbaar — bij fouten zie je direct wat er
+  misgaat (handig in de POC-fase).
++ Nul installatie of configuratie.
+- Niet "echt automatisch" — vereist nog steeds een dubbelklik.
+- Vergeten op te starten = niet beschikbaar.
+
+Wanneer kiezen
+--------------
+- POC- en demofase op je eigen laptop.
+- Wanneer je controle wilt over wanneer de app draait.
+- Wanneer je wilt zien wat er gebeurt in de logs.
+
+
+OPTIE B — STARTUP-FOLDER (AUTOSTART BIJ INLOGGEN)
+=================================================
+
+Wat het is
+----------
+De snelkoppeling uit Optie A in de Startup-map van Windows zetten,
+zodat de app vanzelf opstart zodra je inlogt op je gebruiker.
+
+Hoe je 't maakt
+---------------
+1. Maak eerst de snelkoppeling zoals beschreven in Optie A.
+
+2. Open Uitvoeren (Windows-toets + R) en typ:
+     shell:startup
+   Druk op Enter. Verkenner opent in de Startup-map van je gebruiker.
+
+3. Sleep de snelkoppeling naar deze map (of plak een kopie).
+
+4. Klaar. Bij de volgende inlog start de app vanzelf.
+
+Dagelijks gebruik
+-----------------
+Geen — bij inloggen verschijnt na een paar seconden vanzelf het
+PowerShell-venster en is de app bereikbaar op
+http://localhost:8501.
+
+Voor- en nadelen
+----------------
++ Echt automatisch — zodra ingelogd is alles beschikbaar.
++ Eenvoudig op te zetten (één keer een bestand verslepen).
++ Werkt niet als systeemservice, dus geen rechten-gedoe.
+- Werkt alleen wanneer er iemand is ingelogd op de laptop.
+- Bij meerdere gebruikers van dezelfde laptop start de app voor
+  ieder die inlogt apart.
+- Het PowerShell-venster blijft zichtbaar in de taakbalk.
+
+Wanneer kiezen
+--------------
+- Je werkt altijd ingelogd op dezelfde gebruiker op de laptop.
+- Je wilt de app altijd "gewoon klaar" hebben wanneer je werkt.
+- Je vindt het prima dat een venster in de taakbalk staat.
+
+
+OPTIE C — TASK SCHEDULER (ECHTE ACHTERGROND-SERVICE)
+=====================================================
+
+Wat het is
+----------
+Een geplande taak die de app start bij het opstarten van Windows
+(nog vóór er iemand inlogt), draait als achtergrondproces, en
+zichzelf herstart als 'ie crasht. Dit is het patroon dat je later
+bij klantinstallaties wilt gebruiken.
+
+Hoe je 't maakt
+---------------
+1. Start menu → typ "Taakplanner" → openen.
+
+2. Rechterpaneel → "Taak maken..." (NIET "Eenvoudige taak").
+
+3. Tabblad Algemeen:
+   - Naam: VGBC POC Streamlit
+   - "Uitvoeren ongeacht of de gebruiker is aangemeld" aanvinken
+   - "Met hoogste bevoegdheden uitvoeren" aanvinken
+   - Configureren voor: Windows 10 (geldt ook voor Windows 11)
+
+4. Tabblad Triggers → Nieuw:
+   - Taak starten: "Bij opstarten"
+   - Vertraging instellen: 30 seconden (geeft PostgreSQL tijd
+     om eerst op te komen)
+   - OK
+
+5. Tabblad Acties → Nieuw:
+   - Actie: Programma starten
+   - Programma/script: C:\projects\VGBC\Van Gent BI Consulting\01-dev-poc\start-app.bat
+   - Beginnen in (optioneel): C:\projects\VGBC\Van Gent BI Consulting\01-dev-poc
+   - OK
+
+6. Tabblad Voorwaarden:
+   - "Alleen starten als computer op netvoeding staat" UITvinken
+     (anders start 'ie niet op accu)
+
+7. Tabblad Instellingen:
+   - "Als de taak mislukt, opnieuw starten elke" aanvinken
+   - Stel in op: 1 minuut, maximaal 3 keer
+   - OK
+
+8. Windows vraagt om wachtwoord voor de gebruiker waaronder de
+   taak draait. Vul je Windows-wachtwoord in en klik OK.
+
+Dagelijks gebruik
+-----------------
+Geen. Na elke opstart draait de app automatisch op de achtergrond
+en is bereikbaar op http://localhost:8501.
+
+Voor- en nadelen
+----------------
++ Volledig automatisch, ook als niemand is ingelogd.
++ Herstart zichzelf bij crash.
++ Geen zichtbaar venster — draait stil op de achtergrond.
++ Patroon dat schaalt naar klantinstallaties.
+- Lastiger op te zetten (10-15 minuten configuratie).
+- Bij fouten geen direct zichtbare PowerShell-output —
+  troubleshooting via logbestanden.
+- Vereist dat het Windows-wachtwoord van de gebruiker bekend is
+  en bij wachtwoord-wijziging opnieuw ingesteld moet worden.
+
+Wanneer kiezen
+--------------
+- Wanneer de POC dienst doet als "always-on" demo-omgeving
+  (bv. voor een klantgesprek over een paar dagen).
+- Voor klantinstallaties — daar wil je geen zichtbaar venster.
+- Wanneer je over rebooten heen wilt kunnen kijken.
+
+
+AANBEVELING PER FASE
+====================
+
+Nu (POC / leerfase)
+-------------------
+Optie A. Volledig zichtbaar, makkelijk te debuggen, geen extra
+spullen om te onderhouden. Dubbelklik wanneer je wilt demoen.
+
+Tussen-fase (founding customer #1 op eigen omgeving)
+----------------------------------------------------
+Optie B. Klant zet 'm op zijn eigen laptop in de Startup-folder,
+hoeft niets meer te doen. Voor jou en de klant het meest
+hands-off zonder ingewikkelde configuratie.
+
+Productie (klant 3+ op klant-server)
+-------------------------------------
+Optie C. Bij voorkeur ingericht als onderdeel van de installer
+(zie ook `productisering-vragen.txt` — PowerShell-installer of
+Docker-route).
+
+
+PROBLEEMOPLOSSING
+=================
+
+App start niet of meldt "kan geen verbinding maken met database"
+----------------------------------------------------------------
+Check eerst PostgreSQL:
+  Get-Service postgresql-x64-16
+
+Als Status niet "Running" is:
+  Start-Service postgresql-x64-16
+
+Browser opent niet vanzelf
+--------------------------
+Soms blijft de browser-popup achter. Open zelf:
+  http://localhost:8501
+
+Port 8501 al in gebruik
+-----------------------
+Een vorige Streamlit-proces is nog actief. Kill 'm:
+  Get-Process | Where-Object { $_.ProcessName -eq "python" } | Stop-Process -Force
+
+Of herstart de laptop — netter.
+
+Logbestand voor Taakplanner-runs (Optie C)
+-------------------------------------------
+De Taakplanner geeft geen zichtbaar venster. Wil je toch logs?
+Pas `start-app.bat` aan om output naar bestand te schrijven, of
+voeg in `make.ps1` een logging-regel toe.
+
+
+SAMENVATTING
+============
+
+  Optie A — desktop-snelkoppeling — dubbelklik om te starten — POC-fase
+  Optie B — startup-folder — start bij inloggen — eigen werklaptop
+  Optie C — Taakplanner — start bij opstarten Windows — productie
+
+Voor nu: Optie A. Verder kijken pas wanneer de POC vaker per dag
+gestart moet worden zonder dat jij erbij bent — of wanneer klant
+#1 een installatie op eigen server vraagt.
