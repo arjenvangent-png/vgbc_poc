@@ -1,0 +1,21 @@
+leverancier_id,naam,straat,postcode,plaats,email,telefoon,iban,btw_nummer
+1,Royal Schouten B.V.,Zoëlaan 948,5260PI,Eexterzandvoort,jacobvandenbergh@example.org,+31(0)729-466711,NL53MQXI5775901751,NL86363745B45
+2,van Salm & Walter B.V.,Dylanoweg 0,1277BM,Eext,jasper41@example.net,+3141-5206436,NL67UCWD0371293870,NL05162713B61
+3,Groen NV B.V.,Ibrahimring 21,6927UN,Fleringen,nvan-geffen@example.org,+3121 9656523,NL57IUCH8999404389,NL83640376B13
+4,Alfa Accountants & Adviseurs B.V.,Rafaelpad 69,8582 XE,Alphen,bastiaenseluuk@example.org,006 8486661,NL06URRT2414183285,NL69146303B16
+5,van Heusden Groep V.O.F.,Isabelweg 210,6027HH,Kollumerpomp,rileyhondeveld@example.net,0105-648149,NL80UCPO8507925241,NL91380003B07
+6,Koninklijke Kalman V.O.F.,Chloëweg 3,5365 EK,Oosterblokker,van-de-biesenbosise@example.org,+31(0)38 0617445,NL11CROA5349493759,NL73832060B38
+7,Royal Ariens Ansems ,Lindeweg 4,7383FD,Epe,dirk03@example.net,+31(0)57-1918261,NL08SSBN2344565574,NL31329121B27
+8,Wolters Kluwer ,Bibipad 74,3411 ZR,Mander,moenenmette@example.com,+31(0)135 680442,NL44AMOR8317121003,NL23651994B10
+9,Mahieu Groep ,Dirkpad 0,7029 UZ,Uitdam,de-haasjanna@example.com,+31(0)53 2447209,NL11TTHU4768701462,NL63838065B78
+10,Ardagh Group V.O.F.,Marinusdreef 5,8040HW,Zuidveen,zaraklomp-jan@example.org,(034) 8039652,NL73FHSK5905992937,NL84270103B93
+11,van der Avoirt NV ,Sarahstraat 25,3500LT,Enspijk,van-den-wittenboernina@example.com,+31569 154522,NL89XNZU7528953926,NL44220969B02
+12,Royal Mulder B.V.,Ivanpad 135,8215 AQ,Hernen,jennadirven@example.com,0100-676267,NL55MLRM1793271040,NL54115262B18
+13,Vignon Groep V.O.F.,Thijsweg 96,4015MA,Wildervank,indy44@example.org,+3106 9872050,NL73NCJV9731032417,NL14677418B62
+14,Koninklijke Zuijdveld ,Bilallaan 7,1349 JW,De Steeg,waltrade-walderademadelief@example.net,+31(0)93-8068687,NL24SHPJ1608989921,NL72233206B16
+15,Joosten & Rijcken B.V.,Deanring 68,1487 YS,Zwaanshoek,aheerschop@example.org,+31(0)999 119148,NL26LNIM7997024629,NL96065307B45
+16,Vierdag NV ,Milousingel 132,7754 MP,Dalerveen,tijsmeyer@example.com,(085)-0821486,NL41EYQS0233030705,NL34578610B35
+17,L'Oreal Nederland B.V. N.V.,Verasingel 85,5241 BY,Bergentheim,naomimiltenburg@example.org,(034) 6800722,NL98TZAH4944665743,NL74896910B85
+18,Koninklijke Hak ,Noutlaan 544,4328 DZ,Poppenwier,jade20@example.net,(044)-6660993,NL46KXWH8758428241,NL72482513B53
+19,Koninklijke Verhoeven N.V.,Elizalaan 1,2099 EM,Ursem gem. S,de-grusonazra@example.com,+31(0)02-2356972,NL32KWFY1752500743,NL29271296B66
+20,Office Depot ,Benjaminsteeg 50,1830 OU,Kedichem,jenniferweeldenburg@example.com,+31(0)168 942104,NL77JOXQ9856257532,NL60332309B82

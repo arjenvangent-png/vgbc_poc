@@ -1,0 +1,9 @@
+medewerker_id,naam,rol,email,uurtarief,in_dienst_datum
+1,Joep Brands,Projectleider,xrek@example.net,79.83,2023-02-12
+2,Merijn Bud,Uitvoerder,bernaardsboaz@example.net,78.09,2022-09-23
+3,Julian van Gent,Assistent,jhoekstra@example.com,52.74,2021-08-30
+4,Mila Keijser-Mathurin,Boekhouder,steinmeiernstijn@example.net,55.89,2020-04-29
+5,Niels van den Henst,Planner,feline92@example.com,73.96,2023-01-15
+6,Lucas Hendriks,Kwaliteitscontroleur,florian17@example.org,48.05,2021-10-04
+7,Sander Room-van den Nuwenhuysen,Voorman,rafvan-t-houteveen@example.com,47.86,2023-04-11
+8,Aron van der Veen,Directeur,smeijer@example.com,68.84,2022-12-23

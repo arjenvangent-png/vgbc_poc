@@ -21,6 +21,14 @@ from agent import MODEL, chat
 from db import get_schema_context
 
 # ---------------------------------------------------------------------------
+# Rate-limit configuratie (afweer tegen misbruik & bots — beperkt API-kosten)
+# Zet RATE_LIMIT_MAX_QUERIES=0 om de limiet uit te zetten.
+# ---------------------------------------------------------------------------
+RATE_LIMIT_MAX_QUERIES   = int(os.getenv("RATE_LIMIT_MAX_QUERIES", "20"))
+RATE_LIMIT_MIN_INTERVAL  = float(os.getenv("RATE_LIMIT_MIN_INTERVAL_S", "3"))
+RATE_LIMIT_WINDOW_S      = int(os.getenv("RATE_LIMIT_WINDOW_S", "3600"))   # 1 uur
+
+# ---------------------------------------------------------------------------
 # Paginaconfiguratie
 # ---------------------------------------------------------------------------
 st.set_page_config(
@@ -44,6 +52,49 @@ if "messages" not in st.session_state:
     st.session_state.messages = []        # gespreksgeschiedenis voor de API
 if "display_messages" not in st.session_state:
     st.session_state.display_messages = []  # berichten inclusief SQL-metadata
+if "query_timestamps" not in st.session_state:
+    st.session_state.query_timestamps = []  # voor rate-limiting
+
+
+# ---------------------------------------------------------------------------
+# Rate-limit helper
+# ---------------------------------------------------------------------------
+def check_rate_limit() -> tuple[bool, str]:
+    """
+    Geeft (mag_doorgaan, foutmelding) terug op basis van session-state geschiedenis.
+    Twee regels:
+      1. Maximaal RATE_LIMIT_MAX_QUERIES per RATE_LIMIT_WINDOW_S seconden.
+      2. Minimaal RATE_LIMIT_MIN_INTERVAL seconden tussen vragen.
+    Zet RATE_LIMIT_MAX_QUERIES=0 in secrets om uit te schakelen.
+    """
+    if RATE_LIMIT_MAX_QUERIES <= 0:
+        return True, ""
+
+    now = time.monotonic()
+    # Filter timestamps buiten het venster
+    st.session_state.query_timestamps = [
+        t for t in st.session_state.query_timestamps if now - t < RATE_LIMIT_WINDOW_S
+    ]
+    ts = st.session_state.query_timestamps
+
+    if ts and (now - ts[-1]) < RATE_LIMIT_MIN_INTERVAL:
+        wachten = round(RATE_LIMIT_MIN_INTERVAL - (now - ts[-1]), 1)
+        return False, (
+            f"⏳ Even rustig — wacht nog {wachten} seconden voor je volgende vraag. "
+            "(Dit voorkomt dat geautomatiseerde bots de demo platleggen.)"
+        )
+
+    if len(ts) >= RATE_LIMIT_MAX_QUERIES:
+        oudste = ts[0]
+        reset_min = round((RATE_LIMIT_WINDOW_S - (now - oudste)) / 60, 1)
+        return False, (
+            f"🛑 Demo-limiet bereikt ({RATE_LIMIT_MAX_QUERIES} vragen per uur). "
+            f"Probeer over {reset_min} minuten opnieuw, of "
+            "[plan een gratis intake](https://www.vgbc.nl/contact.html) "
+            "om de assistent met uw eigen data te zien werken."
+        )
+
+    return True, ""
 
 # ---------------------------------------------------------------------------
 # Zijbalk
@@ -121,6 +172,15 @@ user_input = st.chat_input(
 ) or prefill
 
 if user_input:
+    # Rate-limit check vóór we de gebruikersinput verwerken
+    allowed, limit_msg = check_rate_limit()
+    if not allowed:
+        with st.chat_message("user"):
+            st.markdown(user_input)
+        with st.chat_message("assistant"):
+            st.warning(limit_msg)
+        st.stop()
+
     # Gebruikersbericht tonen
     with st.chat_message("user"):
         st.markdown(user_input)
@@ -131,6 +191,10 @@ if user_input:
     st.session_state.messages.append(
         {"role": "user", "content": user_input}
     )
+
+    # Registreer de query VOORDAT we de API aanroepen — zo telt 'm ook als
+    # de gebruiker midden in een trage call op refresh drukt.
+    st.session_state.query_timestamps.append(time.monotonic())
 
     # Assistent antwoord
     with st.chat_message("assistant"):

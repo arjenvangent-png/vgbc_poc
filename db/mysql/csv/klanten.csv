@@ -1,0 +1,81 @@
+klant_id,naam,is_bedrijf,straat,postcode,plaats,email,telefoon,btw_nummer,betaaltermijn_dagen,is_dubieus
+1,Blokland Groep B.V.,1,Kayhof 90,8863LR,Aalden,jetvan-breugel@example.com,0235-116155,NL43321819B60,45,0
+2,Stichting van Laar V.O.F.,1,Indyhof 131,3475 XW,Hernen,jinthe19@example.net,+31(0)83 2764835,NL81618495B93,14,0
+3,Florian Bos,0,Marijnboulevard 95,3767QI,Kapel-Avezaath,leah96@example.net,+31(0)532-871012,,14,0
+4,van Brenen & Demmendaal B.V.,1,Finnlaan 2,3048 GG,Luxwoude,jande-bont@example.org,0957 015430,NL66978480B18,14,0
+5,Engels & Frankhuizen V.O.F.,1,Sofiasteeg 346,2787 PO,Borger,aron98@example.org,(001) 0310518,NL71822782B48,14,1
+6,Schipper & van Salmen ,1,Inayaring 667,6106ZG,Katwoude,jonathanvan-der-linden@example.com,+31(0)624 731781,NL38299737B63,60,0
+7,van der Plas BV Stichting,1,Sanderlaan 4,4872 SN,Bleskensgraaf ca,timmermansbrian@example.org,(088)-2081219,NL13267736B02,45,0
+8,Nout Ouwerkerk,0,Suzestraat 99,9916UQ,Helden,leon46@example.org,075-1079911,,14,0
+9,Luca Rousselet-Huisman,0,Nynkehof 427,9980 TQ,Den Ham,maartenhekker@example.org,+31(0)449 353487,,30,0
+10,Suze Cant,0,Melissalaan 0,8242 JT,Rucphen,heerkensdamian@example.net,+31(0)805 982620,,45,0
+11,Koninklijke Briere V.O.F.,1,Oliviaring 2,3634 YS,Diepenveen,ebrese@example.org,(0754) 330365,NL53315869B23,45,0
+12,Stichting Schokman N.V.,1,Feddestraat 5,2698 YK,Harlingen,bilal60@example.net,(0561) 595148,NL58685014B29,14,1
+13,Royal le Matelot Eenmanszaak,1,Ceylinbaan 436,4777 GE,Goingarijp,schuylenborchanna@example.net,+31134-332003,NL56482366B29,45,0
+14,Loïs Duivenvoorden-van Hulten,0,Juliering 6,7201OL,Volkel,jcadefau@example.org,+3172 7889579,,60,0
+15,General Motors Nederland N.V.,1,Tijnboulevard 434,3581 JO,Ossenzijl,joliemiltenburg@example.org,+31(0)65-8760366,NL87277434B87,14,0
+16,de Gruil NV ,1,Tiessingel 6,3627 NI,Arriën,fboddaugh@example.net,+31(0)27-2046537,NL05466889B37,45,0
+17,Koninklijke de Grote ,1,Lilybaan 30,2327KN,Stad aan 't Haringvliet,lisanne52@example.net,+3124 1904966,NL46417080B53,14,0
+18,Elberts & Peters V.O.F.,1,Aliring 1,7572 LU,Vries,fatima87@example.com,+31(0)94-5314737,NL14919058B65,45,0
+19,Inaya Boers,0,Joepsingel 54,9494 AH,Hartwerd,peronnejuliette@example.com,(083)-7770143,,30,0
+20,Mia Peterse,0,Wesselsteeg 56,5574 QO,Dronten,mohammedhenric-van-den-nuwenhuse@example.net,+31(0)33 7498941,,60,0
+21,Spies & Noordijk ,1,Floorsingel 0,6777 LD,Kilder,eheijmans@example.com,(019)-0229413,NL52408240B08,45,0
+22,van Beek Groep Eenmanszaak,1,Evieboulevard 34,9232EK,'s-Heerenbroek,svan-hamaland@example.net,(040)-3447134,NL99386774B96,30,0
+23,Jurre Heinrichs-van der Smeede,0,Saarlaan 10,5499CH,Steenwijk,jill64@example.net,(071)-9065940,,14,1
+24,Oennen Groep V.O.F.,1,Elizaring 717,2655 KV,Reitsum,qsire@example.com,071 5451680,NL99049027B87,30,0
+25,Dirk N.V.,1,Tijmensingel 0,1248JA,De Kiel,milaheijman@example.com,+3127 4846773,NL03859770B34,45,0
+26,Lisanne Jekel-de Hoog,0,Nisaboulevard 658,8044 JC,Werkendam,vweerdenburg@example.net,+31(0)753-396360,,30,0
+27,Ninthe van Noort,0,Irisweg 70,2895CG,Waarland,ubeekman@example.org,+31(0)21-7459615,,14,0
+28,Adecco B.V.,1,Timdreef 400,6045 BJ,Kaard,klamore@example.org,+31969 379237,NL78091343B16,45,0
+29,Koninklijke Reimes B.V.,1,Tycholaan 67,6369KS,Losser,de-ruitermart@example.org,097 4395339,NL07482175B94,30,0
+30,Melissa Jacobi,0,Milansingel 9,6214 VA,Grijpskerke,hiddevan-der-meer@example.com,0247-451712,,45,0
+31,de Swart & Zaal N.V.,1,Feddeweg 70,8931 ST,Radio Kootwijk,jansebjorn@example.org,071-1382675,NL16048175B49,60,0
+32,Loes Kerkhof,0,Merlesingel 64,8537PX,Dedemsvaart,catharina50@example.com,0317-139005,,60,0
+33,Hollander & Mathurin V.O.F.,1,Hendriksteeg 210,6053BL,Kring van Dorth,hondeveldlara@example.com,+3117 7589178,NL18393352B90,30,0
+34,Wessel Broekhoven-van den Hoek,0,Félinebaan 7,8617 EF,Minnertsga,chrisholthuis@example.com,+31698-478961,,45,0
+35,Thijmen van het Heerenveen,0,Tristanhof 5,6661 BU,Klimmen,vajen27@example.org,+31116 152809,,60,0
+36,Megan Heyne,0,Norahweg 0,2945 KG,Heveadorp,imkevan-rijnsbergen@example.org,+3158 5149368,,60,0
+37,Ruijs BV V.O.F.,1,Laraweg 1,6667KX,Meerlo,liza99@example.org,022 9014767,NL24455022B96,60,0
+38,MSD B.V.,1,Keanoring 00,5432SU,Drogteropslagen,van-wallaertleah@example.com,+31(0)26 8388516,NL43815614B97,14,0
+39,van Egisheim BV V.O.F.,1,Yasminpad 97,4161 BL,Petten,de-ruiternoortje@example.com,+31352-181883,NL71596966B41,60,0
+40,Koninklijke Joosten N.V.,1,Lilystraat 79,2527 EC,Maasvlakte Rotterdam,ella05@example.net,+31477 005411,NL31243292B12,60,0
+41,Bacardi Nederland N.V.,1,Tomboulevard 182,9377HN,Gasselternijveenschemond,riley46@example.com,+31905-151864,NL98079359B78,45,0
+42,Nadine Kalman,0,Eliseweg 54,5291 JY,Mussel,isabellevan-der-avoirt@example.org,+31(0)85-0542357,,14,0
+43,Finn Jacobs-Ketel,0,Mirteboulevard 88,7592JK,Haaksbergen,juulvan-engeland@example.org,+31(0)53-7947383,,14,0
+44,Zara van Mil,0,Izestraat 7,7688 KM,Elshout,bradley75@example.net,+3181 4124782,,45,0
+45,Bibi Mulders,0,Sofiebaan 0,7853 FX,Hooge Zwaluwe,uphaussofie@example.org,+31220-472779,,45,0
+46,Erhout BV N.V.,1,Boazhof 9,9117 BO,Vleuten,juliejdotte@example.com,+31(0)09-5396218,NL43289861B43,30,0
+47,Stichting van den Wittenboer ,1,Quintenboulevard 319,9205 VP,Griendtsveen,ovan-orleans@example.org,+31(0)170 430305,NL88880670B65,45,0
+48,Leah de Vries,0,Benweg 45,6541BZ,Schiphol,lvisser@example.com,(058)-4161692,,30,0
+49,Koninklijke Greij B.V.,1,Kayleepad 64,9165ZV,Geerdijk,janssenmyrthe@example.net,(0021)-355690,NL15447962B75,45,0
+50,Olaf van Ham,0,Timboulevard 28,4654 HB,Hantum,yvan-den-broek@example.net,+3144 7394731,,30,0
+51,Eelman & van Hemert V.O.F.,1,Louisepad 31,1237XJ,Zandhuizen,vince82@example.net,+31146 786691,NL27155188B44,14,0
+52,Uittenbosch & Eelman N.V.,1,Annedreef 225,2584QM,Wijdewormer,guus49@example.net,+31829 922995,NL77852892B26,14,0
+53,Boers BV Eenmanszaak,1,Yassinhof 647,7027ED,Hekendorp,evelien25@example.net,+31562-588153,NL09439690B78,45,0
+54,Technische Unie V.O.F.,1,Marepad 53,8787TF,Angerlo,de-pauwamina@example.com,(039) 5004797,NL47321046B96,14,0
+55,Royal Arens N.V.,1,Chloëlaan 6,2849 IG,Ouwsterhaule,louise58@example.com,+31(0)398 680002,NL16245650B60,14,0
+56,Puck van Nus,0,Eveliensteeg 59,5269 LV,Veldhoven,estange@example.org,+3151-6940974,,30,0
+57,Carnotte & van Poppel N.V.,1,Mohamedring 63,1897 TI,Voorburg,daphneveltman@example.net,(086)-5278585,NL28962309B13,30,0
+58,Royal van Rossum Stichting,1,Philipsteeg 441,5652 CS,Buitenkaag,sienna74@example.net,(033)-8484219,NL33484344B37,60,0
+59,Gijs Cammel-van der Horst,0,Bradleyboulevard 5,9120 KA,Surhuizum,wmansveld@example.com,+31401-938026,,30,0
+60,Vince Bouwhuisen,0,Johanneslaan 0,6991 SD,Westerhoven,ghulshouts@example.com,0315-274205,,60,0
+61,Liz Louws,0,Meikering 51,8122 UP,Aalsmeer,sam37@example.com,+31499-045301,,45,0
+62,SABIC Stichting,1,Jansingel 956,2833 HC,Walsoorden,dani91@example.org,(0982) 258713,NL26841459B33,60,0
+63,Voortman Steel Group V.O.F.,1,Karlijnbaan 4,1391BW,Borculo,doornhemsophie@example.com,046 2265676,NL87072867B90,14,0
+64,Microsoft Stichting,1,Zoeylaan 8,4863 DW,Gaast,jonas10@example.net,+31(0)90-3311907,NL82512868B23,30,0
+65,Pieters Groep B.V.,1,Elinestraat 534,5836RD,Winneweer,femkevan-daal@example.net,(005)-6856624,NL06738302B84,14,0
+66,Elise van der Maath,0,Myrthehof 270,3688 YP,Klimmen,nielsengels@example.com,+3118-3046990,,14,0
+67,Ligtvoet Groep B.V.,1,Jentestraat 363,9467 PW,Marle,rafael87@example.com,+3175 3556093,NL83735403B31,45,0
+68,Beijring & Robbrechts Bruijne V.O.F.,1,Charlotteweg 547,3725 IU,Westzaan,ile-marec@example.net,080 1006231,NL89964235B36,45,0
+69,Adam Molenaar,0,Bryanstraat 977,7088AB,Wapenveld,bibi40@example.net,+31(0)21-1823398,,30,0
+70,Koninklijke Ruijs ,1,Siemring 8,2002 FB,Nederweert-Eind,van-der-flaasselena@example.org,(039) 7401489,NL61567933B41,60,0
+71,Lambregt NV N.V.,1,Samdreef 185,2163VM,Paesens,bas47@example.com,(058) 6629619,NL03926142B93,60,0
+72,Stichting Eckhardt B.V.,1,Timpad 121,9678GA,Den Dungen,furdaquinn@example.net,+31995 604661,NL14262655B11,60,0
+73,van den Hoek & Kramer N.V.,1,Stijnlaan 1,4437 DG,Elburg,aiden65@example.net,+31(0)575-692459,NL62244472B12,60,0
+74,Leon Timmermans-Lafleur,0,Meesweg 9,7564XH,Wognum,emilyvan-der-spaendonck@example.org,0737 416724,,14,0
+75,Guus Keltenie-van Breukeleveen,0,Tobiasstraat 9,9886 CY,Nunhem,haneberglise@example.org,+3129-0965610,,14,0
+76,Rijks BV ,1,Aydensingel 4,6112 TV,Slootdorp,annemijnvan-roijen@example.com,(017)-7514010,NL88899375B67,45,0
+77,Mare Haneberg,0,Annabeldreef 25,3736 LO,Schagen,vboeser@example.net,(0796) 603341,,14,0
+78,van der Linden BV V.O.F.,1,Elizabethboulevard 579,2499RI,Meijel,passchiersmika@example.org,+31(0)52 8669296,NL55371478B59,60,0
+79,Triodos Bank V.O.F.,1,Noapad 7,9368PF,Ransdaal,tvan-beeck-beeckmans@example.com,(021)-9034043,NL78282742B25,45,0
+80,Stichting van Klaarwater B.V.,1,Catohof 1,5407WF,Schinnen,pailletjulius@example.net,+3196-2923309,NL97881914B85,60,0
